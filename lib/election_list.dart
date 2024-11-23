@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 import 'package:voting_system/main.dart';
+import 'package:voting_system/terms_and_conditions_screen.dart';
 import 'HomeScreen.dart';
 import 'election_detail_screen.dart';
 
@@ -319,7 +320,7 @@ class _ElectionListScreenState extends State<ElectionListScreen> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => ElectionDetailsScreen(
+                builder: (context) => TermsAndConditionsScreen(
                   electionId: electionId,
                 ),
               ),
