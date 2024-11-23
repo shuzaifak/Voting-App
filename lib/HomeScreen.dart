@@ -7,6 +7,7 @@ import 'package:voting_system/login_screen.dart';
 import 'package:voting_system/main.dart';
 import 'package:voting_system/profile_screen.dart';
 import 'package:voting_system/results_screen.dart';
+import 'package:voting_system/terms_and_conditions_screen.dart';
 
 import 'election_detail_screen.dart';
 import 'election_list.dart';
@@ -384,7 +385,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => ElectionDetailsScreen(
+                            builder: (context) => TermsAndConditionsScreen(
                               electionId: doc.id,
                             ),
                           ),
