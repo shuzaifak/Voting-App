@@ -100,24 +100,33 @@ class _AdminResultsScreenState extends State<AdminResultsScreen> with SingleTick
 
       final candidates = <Map<String, dynamic>>[];
       int totalVotes = 0;
+
+      // First calculate total votes
+      for (final candidateDoc in candidatesSnapshot.docs) {
+        final votes = candidateVotes[candidateDoc.id] ?? 0;
+        totalVotes += votes;
+      }
+
       Map<String, dynamic>? winner;
 
+      // Then calculate percentages using the total
       for (final candidateDoc in candidatesSnapshot.docs) {
         final candidateData = candidateDoc.data();
         final votes = candidateVotes[candidateDoc.id] ?? 0;
-        totalVotes += votes;
 
-        candidates.add({
+        final candidateInfo = {
           'id': candidateDoc.id,
           'name': candidateData['name'],
           'position': candidateData['position'] ?? 'Candidate',
           'votes': votes,
-          'percentage': totalVotes > 0 ? (votes / totalVotes * 100) : 0.0,
-        });
+          'percentage': totalVotes > 0 ? ((votes / totalVotes) * 100) : 0.0,
+        };
+
+        candidates.add(candidateInfo);
 
         if (electionData['status'] == 'completed' &&
             (winner == null || votes > (winner['votes'] ?? 0))) {
-          winner = candidates.last;
+          winner = candidateInfo;
         }
       }
 
